@@ -46,6 +46,12 @@
                     <td><a href="codigoPHP/ejercicio01.php">&#x25B6;</a></td>
                     <td><a href="mostrarCodigo/mostrarEjercicio01.php">&#128065;</a></td>
                 </tr>
+                <tr>
+                    <td>02</td>
+                    <td>Desarrollo de un control de acceso con identificación del usuario basado en el uso de una tabla “Usuario” de la base de datos</td>
+                    <td><a href="codigoPHP/ejercicio02.php">&#x25B6;</a></td>
+                    <td><a href="mostrarCodigo/mostrarEjercicio02.php">&#128065;</a></td>
+                </tr>
             </table>
         </main>
         <footer>

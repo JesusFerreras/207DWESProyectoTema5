@@ -7,7 +7,7 @@ create table if not exists DB207DWESProyectoTema5.T01_Usuario(
     T01_CodUsuario varchar(8) primary key,
     T01_Password varchar(255) not null,
     T01_DescUsuario varchar(255) not null,
-    T01_NumConexiones int default 1 not null,
+    T01_NumConexiones int default 0 not null,
     T01_FechaHoraUltimaConexion datetime default now() not null,
     T01_Perfil enum('usuario', 'administrador') not null,
     T01_ImagenUsuario blob
