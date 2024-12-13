@@ -17,25 +17,36 @@
             $DB = new PDO(DSN, USUARIO, PASSWORD);
             
             //Se recoge el usuario con el codigo introducido
-            $usuario = $DB->query(<<<FIN
+            $seleccion = $DB->prepare(<<<FIN
                 select * from T01_Usuario
-                    where T01_CodUsuario = '{$_SERVER["PHP_AUTH_USER"]}'
-                    and T01_Password = sha2('{$_SERVER["PHP_AUTH_USER"]}{$_SERVER["PHP_AUTH_PW"]}', 256)
+                    where T01_CodUsuario = :codigo
+                    and T01_Password = sha2(:contrasena, 256)
                 ;
-            FIN)->fetchObject();
+            FIN);
+
+            $seleccion->execute([
+                ':codigo' => $_SERVER["PHP_AUTH_USER"],
+                ':contrasena' => $_SERVER["PHP_AUTH_USER"].$_SERVER["PHP_AUTH_PW"]
+            ]);
+
+            $usuario = $seleccion->fetchObject();
                     
             //Si no existe el usuario
             if (!$usuario) {
                 $mensajeError = '<p>Error de autenticación</p>';
             } else {
                 //Se actualiza el numero de conexiones del usuario
-                $DB->exec(<<<FIN
+                $actualizacion = $DB->prepare(<<<FIN
                     update T01_Usuario
                         set T01_NumConexiones = T01_NumConexiones+1,
                         T01_FechaHoraUltimaConexion = now()
-                        where T01_CodUsuario = '{$_SERVER['PHP_AUTH_USER']}'
+                        where T01_CodUsuario = :codigo
                     ;
                 FIN);
+                        
+                $actualizacion->execute([
+                    ':codigo' => $_SERVER['PHP_AUTH_USER']
+                ]);
             }
         } catch (Exception $ex) {
             //Se muestran el mensaje y codigo de error

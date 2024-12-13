@@ -9,7 +9,7 @@
     </head>
     <body>
         <header>
-            <h1>Tema 5: Control de acceso, cookies y sesiones</h1>
+            <h1>Tema 5: Desarrollo de aplicaciones web utilizando código embebido</h1>
             <div>
                 <a href="../207DWESProyectoTema4/indexProyectoTema4.php">&#10094; Anterior</a>
                 <a href="">Siguiente &#10095;</a>
